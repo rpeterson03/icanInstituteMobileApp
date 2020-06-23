@@ -13,6 +13,10 @@ buildscript {
     }
     dependencies {
         classpath("com.android.tools.build:gradle:3.5.2")
+         implementation "androidx.annotation:annotation:1.1.0"
+  androidTestImplementation 'androidx.annotation:annotation:1.0.0'
+  androidTestImplementation(project(path: ":detox"))
+  androidTestImplementation 'junit:junit:4.12'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -35,4 +39,12 @@ allprojects {
         jcenter()
         maven { url 'https://www.jitpack.io' }
     }
+}
+android {
+
+  defaultConfig {
+
+      testBuildType System.getProperty('testBuildType', 'debug') // This will later be used to control the test apk build type
+      testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+  }
 }
