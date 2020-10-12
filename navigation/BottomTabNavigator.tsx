@@ -5,9 +5,12 @@ import * as React from 'react';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
-import TabOneScreen from '../screens/TabOneScreen';
-import TabTwoScreen from '../screens/TabTwoScreen';
-import { BottomTabParamList, TabOneParamList, TabTwoParamList } from '../types';
+import HomeScreen from '../screens/HomeScreen';
+import ClassesScreen from '../screens/ClassesScreen';
+import CoachingScreen from '../screens/CoachingScreen';
+import NeuroToolsScreen from '../screens/NeuroToolsScreen';
+
+import { BottomTabParamList, HomeParamList, ClassesParamList, CoachingParamList, NeuroToolsParamList } from '../types';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -16,18 +19,32 @@ export default function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
-      initialRouteName="TabOne"
+      initialRouteName="Home"
       tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}>
       <BottomTab.Screen
-        name="TabOne"
-        component={TabOneNavigator}
+        name="Home"
+        component={HomeNavigator}
         options={{
           tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
         }}
       />
       <BottomTab.Screen
-        name="TabTwo"
-        component={TabTwoNavigator}
+        name="Classes"
+        component={ClassesNavigator}
+        options={{
+          tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
+        }}
+      />
+          <BottomTab.Screen
+        name="Coaching"
+        component={CoachingNavigator}
+        options={{
+          tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
+        }}
+      />
+           <BottomTab.Screen
+        name="Neuro Tools"
+        component={NeuroToolsNavigator}
         options={{
           tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
         }}
@@ -44,30 +61,58 @@ function TabBarIcon(props: { name: string; color: string }) {
 
 // Each tab has its own navigation stack, you can read more about this pattern here:
 // https://reactnavigation.org/docs/tab-based-navigation#a-stack-navigator-for-each-tab
-const TabOneStack = createStackNavigator<TabOneParamList>();
+const HomeStack = createStackNavigator<HomeParamList>();
 
-function TabOneNavigator() {
+function HomeNavigator() {
   return (
-    <TabOneStack.Navigator>
-      <TabOneStack.Screen
-        name="TabOneScreen"
-        component={TabOneScreen}
-        options={{ headerTitle: 'Tab One Title' }}
+    <HomeStack.Navigator>
+      <HomeStack.Screen
+        name="HomeScreen"
+        component={HomeScreen}
+        options={{ headerTitle: 'Home' }}
       />
-    </TabOneStack.Navigator>
+    </HomeStack.Navigator>
   );
 }
 
-const TabTwoStack = createStackNavigator<TabTwoParamList>();
+const ClassesStack = createStackNavigator<ClassesParamList>();
 
-function TabTwoNavigator() {
+function ClassesNavigator() {
   return (
-    <TabTwoStack.Navigator>
-      <TabTwoStack.Screen
-        name="TabTwoScreen"
-        component={TabTwoScreen}
-        options={{ headerTitle: 'Tab Two Title' }}
+    <ClassesStack.Navigator>
+      <ClassesStack.Screen
+        name="ClassesScreen"
+        component={ClassesScreen}
+        options={{ headerTitle: 'Classes' }}
       />
-    </TabTwoStack.Navigator>
+    </ClassesStack.Navigator>
   );
+}
+
+const CoachingStack = createStackNavigator<CoachingParamList>();
+
+function CoachingNavigator() {
+  return(
+    <CoachingStack.Navigator>
+      <CoachingStack.Screen
+        name="CoachingScreen"
+        component={CoachingScreen}
+        options={{ headerTitle: 'Coaching' }}
+      />
+    </CoachingStack.Navigator>
+  )
+}
+
+const NeuroToolsStack = createStackNavigator<NeuroToolsParamList>();
+
+function NeuroToolsNavigator() {
+  return (
+    <NeuroToolsStack.Navigator>
+      <NeuroToolsStack.Screen
+      name="NeuroToolsScreen"
+      component={NeuroToolsScreen}
+      options={{headerTitle:'Neuro Tools'}}
+      />
+    </NeuroToolsStack.Navigator>
+  )
 }
