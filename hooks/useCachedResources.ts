@@ -16,6 +16,8 @@ export default function useCachedResources() {
         await Font.loadAsync({
           ...Ionicons.font,
           'space-mono': require('../assets/fonts/SpaceMono-Regular.ttf'),
+          'futura-pt-heavy': require('../assets/fonts/FuturaPTHeavy.otf'),
+          'futura-pt-book': require('../assets/fonts/FuturaPTBook.otf')
         });
       } catch (e) {
         // We might want to provide this error information to an error reporting service

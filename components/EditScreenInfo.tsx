@@ -1,3 +1,4 @@
+//TODO refactor this to be used as a way to get to wordpress links (ie. Meet with deb )
 import * as WebBrowser from 'expo-web-browser';
 import React from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
