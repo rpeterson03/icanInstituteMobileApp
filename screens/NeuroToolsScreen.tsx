@@ -20,6 +20,7 @@ export default function NeuroToolsScreen() {
   const [isLoading, setIsLoading] = useState(true);
   const [categories, setCategories] = useState([]);
   const [subCategories, setSubCategories] = useState([]);
+  const [rawCategories, setRawCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('');
   const [selectedSubCategory, setSelectedSubCategory] = useState('');
 
@@ -31,6 +32,7 @@ export default function NeuroToolsScreen() {
         .then(response => {
           console.log(`getting neurotools...`);
           setTimeout(()=>{
+      
             setNeuroTools(response.data);
             setIsLoading(false);
           },2000)
@@ -45,6 +47,7 @@ export default function NeuroToolsScreen() {
           const categoryMap = [...new Set(response.data.map(category => category.top_level))] //should just have deduped map of categories
          
            setTimeout(()=>{
+            setRawCategories(response.data);
             setCategories(categoryMap);
             setSubCategories(response.data);
            });
@@ -107,14 +110,14 @@ export default function NeuroToolsScreen() {
      setSubCategory(categoryName);
   }
   const setSubCategory = (categoryName)=> {
-     const filteredSubCategories = categories.filter(subCategory => subCategory.top_level === categoryName)
-    setSubCategories(filteredSubCategories);
+     const filteredSubCategories = rawCategories.filter(subCategory => subCategory.top_level === categoryName)
+     setSubCategories(filteredSubCategories? filteredSubCategories : []);
   }
     return (isLoading ? <Text>Loading...</Text> :
    <View style={styles.container}>
       <View style={styles.categories}>
       <CategorySelector setCategory={ index => setCategory(index)} categories={categories}/>
-      <CategorySelector setCategory={console.log('hi')} categories={subCategories} subcategory={true} />
+      <CategorySelector setCategory={setSubCategories} categories={subCategories} subcategory={true} />
       {/* <CategorySelector subcategory={'solution'} categories={categories}/> */}
       </View>
       <FlatList
